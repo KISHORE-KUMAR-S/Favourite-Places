@@ -45,5 +45,10 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Pick your favourite place image.</string>
+	<key>NSCameraUsageDescription</key>
+	<key>NSMicrophoneUsageDescription</key>
 </dict>
 </plist>
