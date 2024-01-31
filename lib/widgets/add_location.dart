@@ -28,7 +28,7 @@ class _AddLocationState extends State<AddLocation> {
     final latitude = _pickedLocation!.latitude;
     final longitude = _pickedLocation!.longitude;
     //Google Maps Static API
-    return 'https://maps.googleapis.com/maps/api/staticmap?center=$latitude,$longitude&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C$latitude,$longitude&key=$apiKey';
+    return 'https://maps.googleapis.com/maps/api/staticmap?center=$latitude,$longitude&zoom=13&size=600x300&maptype=roadmap&markers=color:red%7Clabel:Location%7C$latitude,$longitude&key=$apiKey';
   }
 
   void getCurrentLocation() async {

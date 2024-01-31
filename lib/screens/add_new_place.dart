@@ -67,7 +67,8 @@ class _AddNewPlaceState extends ConsumerState<AddNewPlace> {
               onPickImage: (image) => _selectedImage = image,
             ),
             const SizedBox(height: 16),
-            AddLocation(onSelectLocation: (location) => _selectedLocation),
+            AddLocation(
+                onSelectLocation: (location) => _selectedLocation = location),
             const SizedBox(height: 16),
             ElevatedButton.icon(
               onPressed: _savePlace,

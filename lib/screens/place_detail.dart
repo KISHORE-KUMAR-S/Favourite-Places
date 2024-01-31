@@ -1,3 +1,4 @@
+import 'package:favourite_places/models/api.dart';
 import 'package:favourite_places/models/place.dart';
 import 'package:flutter/material.dart';
 
@@ -5,6 +6,13 @@ class PlaceDetails extends StatelessWidget {
   const PlaceDetails({super.key, required this.place});
 
   final Place place;
+
+  String get locationImage {
+    final latitude = place.location.latitude;
+    final longitude = place.location.longitude;
+    //Google Maps Static API
+    return 'https://maps.googleapis.com/maps/api/staticmap?center=$latitude,$longitude&zoom=13&size=600x300&maptype=roadmap&markers=color:red%7Clabel:Location%7C$latitude,$longitude&key=$apiKey';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +27,42 @@ class PlaceDetails extends StatelessWidget {
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,
-            )
+            ),
+            Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Column(
+                  children: [
+                    CircleAvatar(
+                      radius: 70,
+                      backgroundImage: NetworkImage(locationImage),
+                    ),
+                    const SizedBox(height: 16),
+                    Container(
+                      alignment: Alignment.center,
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.transparent,
+                            Colors.black54,
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 16,
+                      ),
+                      child: Text(
+                        place.location.address,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    )
+                  ],
+                ))
           ],
         ));
   }
