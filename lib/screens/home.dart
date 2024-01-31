@@ -1,6 +1,7 @@
 import 'dart:io';
 
-import 'package:favourite_places/new_place.dart';
+import 'package:favourite_places/screens/add_new_place.dart';
+import 'package:favourite_places/widgets/places_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -36,12 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: const Center(
-        child: Text(
-          'No places added yet.',
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
+      body: const PlacesList(places: []),
     );
   }
 }
