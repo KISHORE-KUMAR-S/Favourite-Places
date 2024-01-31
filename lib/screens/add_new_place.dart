@@ -1,19 +1,33 @@
+import 'package:favourite_places/providers/user_places.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AddNewPlace extends StatefulWidget {
+class AddNewPlace extends ConsumerStatefulWidget {
   const AddNewPlace({super.key});
 
   @override
-  State<AddNewPlace> createState() => _AddNewPlaceState();
+  ConsumerState<AddNewPlace> createState() => _AddNewPlaceState();
 }
 
-class _AddNewPlaceState extends State<AddNewPlace> {
+class _AddNewPlaceState extends ConsumerState<AddNewPlace> {
   final _titleController = TextEditingController();
 
   @override
   void dispose() {
     super.dispose();
     _titleController.dispose();
+  }
+
+  void _savePlace() {
+    final enteredText = _titleController.text;
+
+    if (enteredText.isEmpty) {
+      return;
+    }
+
+    ref.read(userPlacesProvider.notifier).addPlace(enteredText);
+
+    Navigator.pop(context);
   }
 
   @override
@@ -31,11 +45,6 @@ class _AddNewPlaceState extends State<AddNewPlace> {
                   .titleMedium!
                   .copyWith(color: Theme.of(context).colorScheme.onBackground),
               decoration: InputDecoration(
-                // label: Text(
-                //   'Title',
-                //   style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                //       color: Theme.of(context).colorScheme.onBackground),
-                // ),
                 labelText: 'Title',
                 labelStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
                     color: Theme.of(context).colorScheme.onBackground),
@@ -43,18 +52,8 @@ class _AddNewPlaceState extends State<AddNewPlace> {
               ),
             ),
             const SizedBox(height: 16),
-            // ElevatedButton(
-            //   onPressed: () {},
-            //   child: const Wrap(
-            //     children: [
-            //       Icon(Icons.add),
-            //       SizedBox(width: 5),
-            //       Text('Add Place'),
-            //     ],
-            //   ),
-            // ),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: _savePlace,
               icon: const Icon(Icons.add),
               label: const Text('Add Place'),
             ),

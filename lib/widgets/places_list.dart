@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:favourite_places/models/place.dart';
+import 'package:favourite_places/screens/place_detail.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PlacesList extends StatelessWidget {
@@ -29,6 +33,17 @@ class PlacesList extends StatelessWidget {
               .titleMedium!
               .copyWith(color: Theme.of(context).colorScheme.onBackground),
         ),
+        onTap: () {
+          if (Platform.isIOS) {
+            Navigator.of(context).push(CupertinoPageRoute(
+              builder: (context) => PlaceDetails(place: places[index]),
+            ));
+          } else {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => PlaceDetails(place: places[index]),
+            ));
+          }
+        },
       ),
     );
   }
