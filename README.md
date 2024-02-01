@@ -1,3 +1,9 @@
-# favourite_places
+# Favourite Places
 
-A new Flutter project.
+A simple Flutter app developed to store a list of locations with titles, images and associated location coordinates as Favourite Places.
+
+# API
+-- Google Maps Static API
+-- Geocoding API
+
+# Screenshots
