@@ -7,11 +7,26 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<HomeScreen> createState() {
+    return _HomeScreenState();
+  }
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  late Future<void> _placesFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _placesFuture = ref.read(userPlacesProvider.notifier).loadPlaces();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final userPlaces = ref.watch(userPlacesProvider);
 
     void addItem() {
@@ -38,7 +53,13 @@ class HomeScreen extends ConsumerWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 2.0),
-        child: PlacesList(places: userPlaces),
+        child: FutureBuilder(
+          future: _placesFuture,
+          builder: (context, snapshot) =>
+              snapshot.connectionState == ConnectionState.waiting
+                  ? const Center(child: CircularProgressIndicator.adaptive())
+                  : PlacesList(places: userPlaces),
+        ),
       ),
     );
   }
