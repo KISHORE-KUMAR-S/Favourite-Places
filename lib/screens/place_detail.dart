@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:favourite_places/models/api.dart';
@@ -37,7 +40,19 @@ class PlaceDetails extends StatelessWidget {
                 child: Column(
                   children: [
                     GestureDetector(
-                      onTap: () => const MapScreen(),
+                      onTap: () {
+                        if (Platform.isIOS) {
+                          Navigator.of(context).push(CupertinoPageRoute(
+                            builder: (context) =>
+                                MapScreen(placeLocation: place.location),
+                          ));
+                        } else {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) =>
+                                MapScreen(placeLocation: place.location),
+                          ));
+                        }
+                      },
                       child: CircleAvatar(
                         radius: 70,
                         backgroundImage: NetworkImage(locationImage),
