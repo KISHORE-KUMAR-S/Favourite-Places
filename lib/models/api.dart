@@ -1,1 +1,1 @@
-const apiKey = "AIzaSyAa0OIDGJ3C44HDQkS6cQq5TlS2WFuzzBE";  //Add your API Key
+const apiKey = "";  //Add your API Key
