@@ -43,13 +43,16 @@ class PlaceDetails extends StatelessWidget {
                       onTap: () {
                         if (Platform.isIOS) {
                           Navigator.of(context).push(CupertinoPageRoute(
-                            builder: (context) =>
-                                MapScreen(placeLocation: place.location),
+                            builder: (context) => MapScreen(
+                                placeLocation: place.location,
+                                isSelecting: false),
                           ));
                         } else {
                           Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) =>
-                                MapScreen(placeLocation: place.location),
+                            builder: (context) => MapScreen(
+                              placeLocation: place.location,
+                              isSelecting: false,
+                            ),
                           ));
                         }
                       },
