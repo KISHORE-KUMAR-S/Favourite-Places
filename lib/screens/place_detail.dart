@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
+
 import 'package:favourite_places/models/api.dart';
 import 'package:favourite_places/models/place.dart';
-import 'package:flutter/material.dart';
+import 'package:favourite_places/screens/map.dart';
 
 class PlaceDetails extends StatelessWidget {
   const PlaceDetails({super.key, required this.place});
@@ -34,9 +36,12 @@ class PlaceDetails extends StatelessWidget {
                 right: 0,
                 child: Column(
                   children: [
-                    CircleAvatar(
-                      radius: 70,
-                      backgroundImage: NetworkImage(locationImage),
+                    GestureDetector(
+                      onTap: () => const MapScreen(),
+                      child: CircleAvatar(
+                        radius: 70,
+                        backgroundImage: NetworkImage(locationImage),
+                      ),
                     ),
                     const SizedBox(height: 16),
                     Container(
